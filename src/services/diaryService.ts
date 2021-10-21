@@ -1,8 +1,8 @@
-import diaryData from '../../data/diaries.json';
+import { diaries } from '../../data/diaries';
 
 import { DiaryEntry } from '../types';
 
-const diaries: Array<DiaryEntry> = diaryData as Array<DiaryEntry>;
+// Services being the logic that will happen when a route gets hit
 
 const getEntries = (): Array<DiaryEntry> => {
   return diaries;
