@@ -2,7 +2,7 @@
 
 import { diaries } from '../../data/diaries';
 
-import { DiaryEntry, nonSensitiveDiaryEntry } from '../types';
+import { DiaryEntry, nonSensitiveDiaryEntry, newDiaryEntry } from '../types';
 
 
 // Pick is a utility type where you can hand-select the types you want, in this case we want everything but 'comment'
@@ -37,8 +37,18 @@ const findEntryById = (id: number): DiaryEntry | undefined => {
   return foundEntry;
 };
 
-const addEntry = () => {
-  return null;
+// Math.max takes in numbers as an argument and not an array hence the spread syntax
+const addEntry = (entry: newDiaryEntry) : DiaryEntry => {
+  const newEntry = {
+    id: Math.max(...diaries.map((diary) => {
+      return diary.id;
+    })) + 1,
+    ...entry    
+  };
+
+  diaries.push(newEntry);
+
+  return newEntry;
 };
 
 export default {

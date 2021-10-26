@@ -12,3 +12,10 @@ export interface DiaryEntry {
   visibility: Visibility;
   comment?: string;
 }
+
+export interface newDiaryEntry {
+  date: string,
+  weather: Weather,
+  visibility: Visibility,
+  comment?: string
+}
