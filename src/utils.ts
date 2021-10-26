@@ -60,13 +60,15 @@ const parseDate = (date: unknown): string => {
 };
 
 // Object.values() returns the objects values as an array, in this case ['sunny', 'rainy', 'cloudy', ...etc]
+// An Enum type (Weather) are real objects that exist at runtime
+// Param is set to any since weather is also unknown and is logical since you don't know what type the weather data is going to be
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isWeather = (param: any): param is Weather => {
     return Object.values(Weather).includes(param);
 };
 
 const parseWeather = (weather: unknown): Weather => {
-    if (!weather || !isString(weather) || !isWeather(weather)) {
+    if (!weather || !isWeather(weather)) {
         throw new Error(`Incorrect or missing weather:  + ${weather}`);
     }
     return weather;
