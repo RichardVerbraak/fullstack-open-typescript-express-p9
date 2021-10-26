@@ -1,4 +1,4 @@
-import { newDiaryEntry } from './types'
+import { newDiaryEntry, Weather } from './types'
 
 const toNewDiaryEntry = (bodyData: unknown) : newDiaryEntry => {
     const {date, weather, visibility, comment} = bodyData
@@ -54,10 +54,23 @@ const isDate = (date: string): boolean => {
 // Because isString the date is set as a string type hence why isDate can use date: string instead of date: unknown
 const parseDate = (date: unknown): string => {
     if (!date || !isString(date) || !isDate(date)) {
-        throw new Error('Incorrect or missing date: ' + date);
+        throw new Error(`Incorrect or missing date: ${date}`);
     }
     return date;
-  };
+};
+
+// Object.values() returns the objects values as an array, in this case ['sunny', 'rainy', 'cloudy', ...etc]
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const isWeather = (param: any): param is Weather => {
+    return Object.values(Weather).includes(param);
+};
+
+const parseWeather = (weather: unknown): Weather => {
+    if (!weather || !isString(weather) || !isWeather(weather)) {
+        throw new Error(`Incorrect or missing weather:  + ${weather}`);
+    }
+    return weather;
+};
 
 export {
     toNewDiaryEntry
