@@ -3,6 +3,8 @@ import diaryRouter from './routes/diaries';
 
 const app = express();
 
+app.use(express.json());
+
 app.get('/ping', (_req, res) => {
     console.log('someone pinged');
     res.send('Ping');
