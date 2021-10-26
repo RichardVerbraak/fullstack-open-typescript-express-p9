@@ -28,6 +28,7 @@ const getNonSensitiveEntries = (): nonSensitiveDiaryEntry => {
   });
 };
 
+// undefined has to be specified here in case the find method doesn't find the diary entry (find returns undefined if not found)
 const findEntryById = (id: number): DiaryEntry | undefined => {
   const foundEntry = diaries.find((diary) => {
     return diary.id === id;
