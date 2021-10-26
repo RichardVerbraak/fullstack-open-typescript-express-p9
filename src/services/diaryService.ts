@@ -28,6 +28,14 @@ const getNonSensitiveEntries = (): nonSensitiveDiaryEntry => {
   });
 };
 
+const findEntryById = (id: number): DiaryEntry | undefined => {
+  const foundEntry = diaries.find((diary) => {
+    return diary.id === id;
+  });
+
+  return foundEntry;
+};
+
 const addEntry = () => {
   return null;
 };
@@ -35,5 +43,6 @@ const addEntry = () => {
 export default {
   getEntries,
   addEntry,
-  getNonSensitiveEntries
+  getNonSensitiveEntries,
+  findEntryById
 };
