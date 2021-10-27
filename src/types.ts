@@ -1,3 +1,5 @@
+// Enums are usually used when there is a set of predetermined values which are not expected to change in the future
+// Or tight values like weekdays, months, directions
 export enum Weather {
   Sunny = 'sunny',
   Rainy = 'rainy',

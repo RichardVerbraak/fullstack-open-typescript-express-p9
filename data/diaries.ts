@@ -1,7 +1,8 @@
 import { DiaryEntry } from "../src/types";
+import { toNewDiaryEntry } from '../src/utils';
 
 
-const diaries : Array<DiaryEntry> = [
+const data = [
     {
         "id": 1,
         "date": "2017-01-01",
@@ -32,4 +33,15 @@ const diaries : Array<DiaryEntry> = [
     }
 ];
 
-export { diaries };
+// Map the diary data in order to make the weather property conform to the Weather type after the change to an Enum
+// We use the 'as' operator to assert the data to be a DiaryEntry (telling the compiler that you know this conforms to a DiaryEntry and have done the checks)
+const diaryEntries: DiaryEntry[] = data.map((diary) => {
+    const diaryEntry : DiaryEntry = toNewDiaryEntry(diary) as DiaryEntry;
+
+    // The object returned from toNewDiaryEntry doesn't return an object with an id field
+    diaryEntry.id = diary.id;
+
+    return diaryEntry;
+});
+
+export { diaryEntries };

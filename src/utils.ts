@@ -1,7 +1,7 @@
 import { newDiaryEntry, Weather } from './types'
 
 const toNewDiaryEntry = (bodyData: unknown) : newDiaryEntry => {
-    const {date, weather, visibility, comment} = bodyData
+    const {date, weather, visibility, comment} = bodyData;
 
     const newEntry : newDiaryEntry = {
         date,
