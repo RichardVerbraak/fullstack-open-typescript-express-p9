@@ -1,5 +1,7 @@
 import { newDiaryEntry, Weather } from './types'
 
+// Checks if the data from the body is valid and then returns the new diary
+// Also used to change the weather prop (a string value) to conform to the enum value (Enum is basically a set of const's)
 const toNewDiaryEntry = (bodyData: unknown) : newDiaryEntry => {
     const {date, weather, visibility, comment} = bodyData;
 
