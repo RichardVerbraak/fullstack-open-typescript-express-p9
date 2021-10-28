@@ -1,16 +1,18 @@
 import { newDiaryEntry, Visibility, Weather } from './types';
 
 // An unknown type does not allow any operations to be done
-type Fields = { comment : unknown, date: unknown, weather: unknown, visibility: unknown };
+// type Fields = { comment : unknown, date: unknown, weather: unknown, visibility: unknown };
 
 // Checks if the data from the body is valid and then returns the new diary
 // Also used to change the weather prop (a string value) to conform to the enum value (Enum is basically a set of const's)
-const toNewDiaryEntry = ({date, weather, visibility, comment} : Fields) : newDiaryEntry => {
+// Also also, destructuring bodyData will cause a lot of trouble
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const toNewDiaryEntry = (bodyData: any) : newDiaryEntry => {
     const newEntry : newDiaryEntry = {
-        date: parseDate(date),
-        weather: parseWeather(weather),
-        visibility: parseVisibility(visibility),
-        comment: parseComment(comment)
+        date: parseDate(bodyData.date),
+        weather: parseWeather(bodyData.weather),
+        visibility: parseVisibility(bodyData.visibility),
+        comment: parseComment(bodyData.comment)
     };
 
     return newEntry;

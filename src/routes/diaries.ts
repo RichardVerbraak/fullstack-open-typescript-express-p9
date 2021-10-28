@@ -7,29 +7,13 @@ import { toNewDiaryEntry } from '../utils';
 
 const router = express.Router();
 
+// Gets all entries without the comment field
 router.get('/', (_req, res) => {
     const diaries = getNonSensitiveEntries();
     res.send(diaries);
 });
 
-router.post('/', (req, res) => {
-    try {
-        const newEntry = toNewDiaryEntry(req.body);
-    
-        const addedEntry = addEntry(newEntry);
-        
-        res.json(addedEntry);
-      } catch (error: unknown) {
-        let errorMessage = 'Something went wrong.';
-
-        if(error instanceof Error) {
-          errorMessage += ' Error: ' + error.message;
-        }
-        res.status(400);
-        res.send(errorMessage);
-      }
-});
-
+// Returns the diary by id
 router.get('/:id', (req, res) => {
     const id = Number(req.params.id);
     const diary = findEntryById(id);
@@ -41,5 +25,28 @@ router.get('/:id', (req, res) => {
         res.status(404);
     }
 });
+
+// Adds new diary entry
+router.post('/', (req, res) => {
+    try {
+        // Parsing the entry
+        const newEntry = toNewDiaryEntry(req.body);
+
+        // Adding the parsed entry
+        const addedEntry = addEntry(newEntry);  
+        
+        res.json(addedEntry);
+      } catch (error) {
+        let errorMessage = 'Something went wrong.';
+
+        if(error instanceof Error) {
+          errorMessage += ' Error: ' + error.message;
+        }
+        res.status(400);
+        res.send(errorMessage);
+      }
+});
+
+
 
 export default router;
