@@ -10,14 +10,15 @@ import { DiaryEntry, nonSensitiveDiaryEntry, newDiaryEntry } from '../types';
 
 // Omit can also be used to exclude the comment like Omit<DiaryEntry, 'comment'>[] and saved as a type
 
-const getEntries = (): Pick<DiaryEntry, 'id' | 'visibility' | 'date' | 'weather'>[] => {
+// Gets all diaries
+const getEntries = (): DiaryEntry[] => {
   return diaryEntries;
 };
 
 // TypeScript only checks if the required fields are there or not
 // It's unaware in the sense that the 'comment' field should be excluded, TS doesn't modify the data, it only checks it
 // Hence you have to exclude the field yourself in order to avoid leaking the sensitive data
-const getNonSensitiveEntries = (): nonSensitiveDiaryEntry => {
+const getNonSensitiveEntries = (): nonSensitiveDiaryEntry[] => {
   return diaryEntries.map(({id, visibility, date, weather}) => {
     return {
       id,
