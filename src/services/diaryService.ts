@@ -1,6 +1,6 @@
 ////// Services being the logic that will happen when a route gets hit
 
-import { diaries } from '../../data/diaries';
+import { diaryEntries } from '../../data/diaries';
 
 import { DiaryEntry, nonSensitiveDiaryEntry, newDiaryEntry } from '../types';
 
@@ -11,14 +11,14 @@ import { DiaryEntry, nonSensitiveDiaryEntry, newDiaryEntry } from '../types';
 // Omit can also be used to exclude the comment like Omit<DiaryEntry, 'comment'>[] and saved as a type
 
 const getEntries = (): Pick<DiaryEntry, 'id' | 'visibility' | 'date' | 'weather'>[] => {
-  return diaries;
+  return diaryEntries;
 };
 
 // TypeScript only checks if the required fields are there or not
 // It's unaware in the sense that the 'comment' field should be excluded, TS doesn't modify the data, it only checks it
 // Hence you have to exclude the field yourself in order to avoid leaking the sensitive data
 const getNonSensitiveEntries = (): nonSensitiveDiaryEntry => {
-  return diaries.map(({id, visibility, date, weather}) => {
+  return diaryEntries.map(({id, visibility, date, weather}) => {
     return {
       id,
       visibility,
@@ -30,7 +30,7 @@ const getNonSensitiveEntries = (): nonSensitiveDiaryEntry => {
 
 // undefined has to be specified here in case the find method doesn't find the diary entry (find returns undefined if not found)
 const findEntryById = (id: number): DiaryEntry | undefined => {
-  const foundEntry = diaries.find((diary) => {
+  const foundEntry = diaryEntries.find((diary) => {
     return diary.id === id;
   });
 
@@ -40,13 +40,13 @@ const findEntryById = (id: number): DiaryEntry | undefined => {
 // Math.max takes in numbers as an argument and not an array hence the spread syntax
 const addEntry = (entry: newDiaryEntry) : DiaryEntry => {
   const newEntry = {
-    id: Math.max(...diaries.map((diary) => {
+    id: Math.max(...diaryEntries.map((diary) => {
       return diary.id;
     })) + 1,
     ...entry    
   };
 
-  diaries.push(newEntry);
+  diaryEntries.push(newEntry);
 
   return newEntry;
 };
