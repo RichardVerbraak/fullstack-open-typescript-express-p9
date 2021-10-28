@@ -3,21 +3,6 @@ import { newDiaryEntry, Visibility, Weather } from './types';
 // An unknown type does not allow any operations to be done
 // type Fields = { comment : unknown, date: unknown, weather: unknown, visibility: unknown };
 
-// Checks if the data from the body is valid and then returns the new diary
-// Also used to change the weather prop (a string value) to conform to the enum value (Enum is basically a set of const's)
-// Also also, destructuring bodyData will cause a lot of trouble
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const toNewDiaryEntry = (bodyData: any) : newDiaryEntry => {
-    const newEntry : newDiaryEntry = {
-        date: parseDate(bodyData.date),
-        weather: parseWeather(bodyData.weather),
-        visibility: parseVisibility(bodyData.visibility),
-        comment: parseComment(bodyData.comment)
-    };
-
-    return newEntry;
-};
-
 // Type Guards & Predicate
 // This is a Type Guard which is a function which returns a boolean based on the type predicate (text is string)
 // The usual type predicate is like this: Paramater is X Type (paramater being the function parameter)
@@ -53,7 +38,7 @@ const parseComment = (comment: unknown) : string => {
 // Checks for a valid date
 const isDate = (date: string): boolean => {
     return Boolean(Date.parse(date));
-  };
+};
 
 // Checks if date is present, is a string and is a valid date
 // Because isString the date is set as a string type hence why isDate can use date: string instead of date: unknown
@@ -90,6 +75,21 @@ const parseVisibility = (visibility: unknown) : Visibility => {
     }
 
     return visibility;
+};
+
+// Checks if the data from the body is valid and then returns the new diary
+// Also used to change the weather prop (a string value) to conform to the enum value (Enum is basically a set of const's)
+// Also also, destructuring bodyData will cause a lot of trouble
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const toNewDiaryEntry = (bodyData: any) : newDiaryEntry => {
+    const newEntry : newDiaryEntry = {
+        date: parseDate(bodyData.date),
+        weather: parseWeather(bodyData.weather),
+        visibility: parseVisibility(bodyData.visibility),
+        comment: parseComment(bodyData.comment)
+    };
+
+    return newEntry;
 };
 
 export {
