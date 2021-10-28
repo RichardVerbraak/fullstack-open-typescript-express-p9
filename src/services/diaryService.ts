@@ -39,7 +39,7 @@ const findEntryById = (id: number): DiaryEntry | undefined => {
 };
 
 // Math.max takes in numbers as an argument and not an array hence the spread syntax
-const addEntry = (entry: newDiaryEntry) : DiaryEntry => {
+const addDiary = (entry: newDiaryEntry) : DiaryEntry => {
   const newEntry = {
     id: Math.max(...diaryEntries.map((diary) => {
       return diary.id;
@@ -54,7 +54,7 @@ const addEntry = (entry: newDiaryEntry) : DiaryEntry => {
 
 export {
   getEntries,
-  addEntry,
+  addDiary,
   getNonSensitiveEntries,
   findEntryById
 };

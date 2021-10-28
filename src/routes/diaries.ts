@@ -2,7 +2,7 @@
 
 import express from 'express';
 
-import { getNonSensitiveEntries, addEntry, findEntryById } from '../services/diaryService';
+import { getNonSensitiveEntries, addDiary, findEntryById } from '../services/diaryService';
 import { toNewDiaryEntry } from '../utils';
 
 const router = express.Router();
@@ -33,7 +33,7 @@ router.post('/', (req, res) => {
         const newEntry = toNewDiaryEntry(req.body);
 
         // Adding the parsed entry
-        const addedEntry = addEntry(newEntry);  
+        const addedEntry = addDiary(newEntry);  
         
         res.json(addedEntry);
       } catch (error) {
