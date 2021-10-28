@@ -1,15 +1,16 @@
-import { newDiaryEntry, Weather } from './types'
+import { newDiaryEntry, Visibility, Weather } from './types';
+
+// An unknown type does not allow any operations to be done
+type Fields = { comment : unknown, date: unknown, weather: unknown, visibility: unknown };
 
 // Checks if the data from the body is valid and then returns the new diary
 // Also used to change the weather prop (a string value) to conform to the enum value (Enum is basically a set of const's)
-const toNewDiaryEntry = (bodyData: unknown) : newDiaryEntry => {
-    const {date, weather, visibility, comment} = bodyData;
-
+const toNewDiaryEntry = ({date, weather, visibility, comment} : Fields) : newDiaryEntry => {
     const newEntry : newDiaryEntry = {
-        date,
-        weather,
-        visibility,
-        comment
+        date: parseDate(date),
+        weather: parseWeather(weather),
+        visibility: parseVisibility(visibility),
+        comment: parseComment(comment)
     };
 
     return newEntry;
@@ -76,6 +77,19 @@ const parseWeather = (weather: unknown): Weather => {
     return weather;
 };
 
+const isVisibility = (param: any) : param is Visibility => {
+    return Object.values(Visibility).includes(param);
+};
+
+const parseVisibility = (visibility: unknown) : Visibility => {
+    if (!visibility || !isVisibility(visibility)) {
+        throw new Error(`Incorrect or missing visibility:  + ${visibility}`);
+    }
+
+    return visibility;
+};
+
 export {
     toNewDiaryEntry
 };
+
