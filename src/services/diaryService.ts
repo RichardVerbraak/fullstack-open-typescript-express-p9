@@ -51,7 +51,7 @@ const addEntry = (entry: newDiaryEntry) : DiaryEntry => {
   return newEntry;
 };
 
-export default {
+export {
   getEntries,
   addEntry,
   getNonSensitiveEntries,

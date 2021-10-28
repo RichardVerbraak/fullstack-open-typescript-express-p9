@@ -2,13 +2,13 @@
 
 import express from 'express';
 
-import diaryService from '../services/diaryService';
+import { getNonSensitiveEntries, addEntry, findEntryById } from '../services/diaryService';
 import { toNewDiaryEntry } from '../utils';
 
 const router = express.Router();
 
 router.get('/', (_req, res) => {
-    const diaries = diaryService.getNonSensitiveEntries();
+    const diaries = getNonSensitiveEntries();
     res.send(diaries);
 });
 
@@ -16,7 +16,7 @@ router.post('/', (req, res) => {
     try {
         const newEntry = toNewDiaryEntry(req.body);
     
-        const addedEntry = diaryService.addDiary(newEntry);
+        const addedEntry = addEntry(newEntry);
         
         res.json(addedEntry);
       } catch (error: unknown) {
@@ -32,7 +32,7 @@ router.post('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
     const id = Number(req.params.id);
-    const diary = diaryService.findEntryById(id);
+    const diary = findEntryById(id);
 
     if(diary) {
         res.status(200);
