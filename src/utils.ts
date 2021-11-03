@@ -1,6 +1,8 @@
 import { newDiaryEntry, Visibility, Weather } from './types';
 
 // An unknown type does not allow any operations to be done
+// When using this type, the req.body that gets passed in will throw up an error since it's of 'any' type (req is any) and is an unsafe-argument
+// This isn't explained or commented on in the course at all...
 // type Fields = { comment : unknown, date: unknown, weather: unknown, visibility: unknown };
 
 // Type Guards & Predicate
